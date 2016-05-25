@@ -14,10 +14,23 @@ class Tank{
         this.image = new Image();
         this.currOrient = 1;
 
+        this.image_up = new Image();
+        this.image_down = new Image();
+        this.image_left = new Image();
+        this.image_right = new Image();
+
         if (this.type == 1){
-            this.image.src = "RESOURCE/Image/bossyellow_1.png";
+            // player
+            this.image_up.src = "RESOURCE/Image/bossyellow_1.png";
+            this.image_down.src = "RESOURCE/Image/bossyellow_2.png";
+            this.image_left.src = "RESOURCE/Image/bossyellow_3.png";
+            this.image_right.src = "RESOURCE/Image/bossyellow_4.png";
         } else {
-            this.image.src = "RESOURCE/Image/player_green_1.png";
+            //enemy
+            this.image_up.src = "RESOURCE/Image/player_green_1.png";
+            this.image_down.src = "RESOURCE/Image/player_green_2.png";
+            this.image_left.src = "RESOURCE/Image/player_green_3.png";
+            this.image_right.src = "RESOURCE/Image/player_green_4.png";
         }
     }
 
@@ -42,32 +55,37 @@ class Tank{
     draw(context){
         switch (this.currOrient){
             case 1: //up
-                if (this.type == 1){
-                    this.image.src = "RESOURCE/Image/bossyellow_1.png";
-                } else {
-                    this.image.src = "RESOURCE/Image/player_green_1.png";
-                }
+                this.image = this.image_up;
+                // if (this.type == 1){
+                //     this.image = this.image_up;
+                // } else {
+                //     // this.image.src = "RESOURCE/Image/player_green_1.png";
+                //
+                // }
                 break;
             case 2: // down
-                if (this.type == 1){
-                    this.image.src = "RESOURCE/Image/bossyellow_2.png";
-                } else {
-                    this.image.src = "RESOURCE/Image/player_green_2.png";
-                }
+                this.image = this.image_down;
+                // if (this.type == 1){
+                //     this.image.src = "RESOURCE/Image/bossyellow_2.png";
+                // } else {
+                //     this.image.src = "RESOURCE/Image/player_green_2.png";
+                // }
                 break;
             case 3: // left
-                if (this.type == 1){
-                    this.image.src = "RESOURCE/Image/bossyellow_3.png";
-                } else {
-                    this.image.src = "RESOURCE/Image/player_green_3.png";
-                }
+                this.image = this.image_left;
+                // if (this.type == 1){
+                //     this.image.src = "RESOURCE/Image/bossyellow_3.png";
+                // } else {
+                //     this.image.src = "RESOURCE/Image/player_green_3.png";
+                // }
                 break;
             case 4: // right
-                if (this.type == 1){
-                    this.image.src = "RESOURCE/Image/bossyellow_4.png";
-                } else {
-                    this.image.src = "RESOURCE/Image/player_green_4.png";
-                }
+                this.image = this.image_right;
+                // if (this.type == 1){
+                //     this.image.src = "RESOURCE/Image/bossyellow_4.png";
+                // } else {
+                //     this.image.src = "RESOURCE/Image/player_green_4.png";
+                // }
                 break;
         }
         
