@@ -56,36 +56,15 @@ class Tank{
         switch (this.currOrient){
             case 1: //up
                 this.image = this.image_up;
-                // if (this.type == 1){
-                //     this.image = this.image_up;
-                // } else {
-                //     // this.image.src = "RESOURCE/Image/player_green_1.png";
-                //
-                // }
                 break;
             case 2: // down
                 this.image = this.image_down;
-                // if (this.type == 1){
-                //     this.image.src = "RESOURCE/Image/bossyellow_2.png";
-                // } else {
-                //     this.image.src = "RESOURCE/Image/player_green_2.png";
-                // }
                 break;
             case 3: // left
                 this.image = this.image_left;
-                // if (this.type == 1){
-                //     this.image.src = "RESOURCE/Image/bossyellow_3.png";
-                // } else {
-                //     this.image.src = "RESOURCE/Image/player_green_3.png";
-                // }
                 break;
             case 4: // right
                 this.image = this.image_right;
-                // if (this.type == 1){
-                //     this.image.src = "RESOURCE/Image/bossyellow_4.png";
-                // } else {
-                //     this.image.src = "RESOURCE/Image/player_green_4.png";
-                // }
                 break;
         }
         
