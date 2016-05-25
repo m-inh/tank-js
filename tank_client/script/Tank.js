@@ -72,5 +72,8 @@ class Tank{
         }
         
         context.drawImage(this.image, this.x, this.y);
+        context.font="15px Georgia";
+        context.fillStyle = "#ffffff";
+        context.fillText(this.uid,this.x-10,this.y-10);
     }
 }

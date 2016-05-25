@@ -45,7 +45,6 @@ function gameStart(uid, x, y) {
 function gameLoop() {
     if (isStart){
         update();
-        context.fillRect(0, 0, window.innerWidth, window.innerHeight);
         draw(context);
     }
 }
@@ -94,6 +93,8 @@ function update() {
 }
 
 function draw(context) {
+    context.fillStyle = '#000000';
+    context.fillRect(0, 0, window.innerWidth, window.innerHeight);
     map.draw(context);
     tank.draw(context);
     playerTankMgr.drawAll(context);
