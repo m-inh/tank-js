@@ -73,4 +73,8 @@ class Tank{
         context.fillStyle = "#ffffff";
         context.fillText(this.uid,this.x-10,this.y-10);
     }
+    
+    shoot(){
+        return new Bullet(this.x+tankSize/2, this.y+tankSize/2, this.currOrient, bulletSpeed, this.type);
+    }
 }

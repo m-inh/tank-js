@@ -9,16 +9,16 @@ var io = require('socket.io')(http);
 
 var playerTank = new Array();
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
     // emit to user info of their tank
     var uid = socket.id;
     var x = getRandomArbitrary(40, 900);
     var y = getRandomArbitrary(40, 600);
     var tank = {
-        'uid' : uid,
-        'x' : x,
-        'y' : y,
-        "orient" : 1
+        'uid': uid,
+        'x': x,
+        'y': y,
+        "orient": 1
     };
 
     //add user to array
@@ -28,24 +28,24 @@ io.on('connection', function(socket){
 
     // emit to other user the new tank
     socket.broadcast.emit('new_enemy', tank);
-    
+
     console.log('user connected: ' + uid);
 
     socket.on('move', function (response) {
-        var uid  = this.id;
+        var uid = this.id;
         var newX = response["x"];
         var newY = response["y"];
         var newOrient = response["orient"];
 
         var move = {
-            "uid" : uid,
-            "y" : newY,
-            "x" : newX,
-            "orient" : newOrient
+            "uid": uid,
+            "y": newY,
+            "x": newX,
+            "orient": newOrient
         };
 
-        for (var i=0; i<playerTank.length; i++){
-            if (playerTank[i]["uid"] == uid){
+        for (var i = 0; i < playerTank.length; i++) {
+            if (playerTank[i]["uid"] == uid) {
                 playerTank[i] = move;
             }
         }
@@ -53,11 +53,25 @@ io.on('connection', function(socket){
         socket.broadcast.emit('player_move', move);
     });
 
-    socket.on('disconnect', function(id) {
-        var uidDis  = this.id;
+    socket.on('shoot', function (response) {
+        var uid = response["uid"];
+        var x = response["x"];
+        var y = response["y"];
+        var orient = response["orient"];
+        var shoot = {
+            "uid": uid,
+            "x": x,
+            "y": y,
+            "orient": orient
+        };
+        socket.broadcast.emit('new_bullet', shoot);
+    });
+
+    socket.on('disconnect', function (id) {
+        var uidDis = this.id;
         var tempTankArr = new Array();
-        for (var i=0; i<playerTank.length; i++){
-            if (playerTank[i]["uid"] != uidDis){
+        for (var i = 0; i < playerTank.length; i++) {
+            if (playerTank[i]["uid"] != uidDis) {
                 tempTankArr.push(playerTank[i]);
             }
         }
@@ -69,11 +83,11 @@ io.on('connection', function(socket){
 
 app.use(express.static(__dirname + '/tank_client'));
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/tank_client/index.html');
 });
 
-http.listen(3000, function(){
+http.listen(3000, function () {
     console.log('listening on *:3000');
 });
 
