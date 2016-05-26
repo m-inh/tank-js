@@ -13,6 +13,9 @@ class Tank{
         this.uid = uid;
         this.image = new Image();
         this.currOrient = 1;
+        this.enemy_revenge = "";
+
+        this.isAlive = true;
 
         this.image_up = new Image();
         this.image_down = new Image();
@@ -53,28 +56,73 @@ class Tank{
     }
 
     draw(context){
-        switch (this.currOrient){
-            case 1: //up
-                this.image = this.image_up;
-                break;
-            case 2: // down
-                this.image = this.image_down;
-                break;
-            case 3: // left
-                this.image = this.image_left;
-                break;
-            case 4: // right
-                this.image = this.image_right;
-                break;
+        if (this.isAlive){
+            switch (this.currOrient){
+                case 1: //up
+                    this.image = this.image_up;
+                    break;
+                case 2: // down
+                    this.image = this.image_down;
+                    break;
+                case 3: // left
+                    this.image = this.image_left;
+                    break;
+                case 4: // right
+                    this.image = this.image_right;
+                    break;
+            }
+
+            context.drawImage(this.image, this.x, this.y);
+            context.font="15px Georgia";
+            context.fillStyle = "#ffffff";
+            context.fillText(this.uid,this.x-10,this.y-10);
         }
-        
-        context.drawImage(this.image, this.x, this.y);
-        context.font="15px Georgia";
-        context.fillStyle = "#ffffff";
-        context.fillText(this.uid,this.x-10,this.y-10);
     }
     
     shoot(){
-        return new Bullet(this.x+tankSize/2, this.y+tankSize/2, this.currOrient, bulletSpeed, this.type);
+        return new Bullet(this.x+tankSize/2-bulletSize/2, this.y+tankSize/2-bulletSize/2, this.currOrient, bulletSpeed, this.type, bulletSize, this.uid);
+    }
+
+    // isDestroy(bulletMgr){
+    //     for (var i=0; i<bulletMgr.size(); i++){
+    //         var bullet = bulletMgr.getBullet(i);
+    //         if (bullet.type == enemyType && this.isInside(bullet.x, bullet.y, bullet.size)){
+    //             this.enemy_revenge = bullet.uid;
+    //             this.isAlive = false;
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    isInside(objX, objY, objSize){
+
+        var xLeft = objX;
+        var xRight = objX + objSize;
+        var yTop = objY;
+        var yBottom = objY + objSize;
+
+        if (this.isPointInside(xLeft, yTop)  ){
+            return true;
+        }
+        if (this.isPointInside(xRight, yTop)){
+            return true;
+        }
+        if (this.isPointInside(xLeft, yBottom)){
+            return true;
+        }
+        if (this.isPointInside(xRight, yBottom)){
+            return true;
+        }
+
+        return false;
+    }
+
+    isPointInside(objX, objY){
+        if (objX > this.x && objX < (this.x+tankSize) && objY > this.y && objY < (this.y+tankSize)){
+            return true;
+        }
+
+        return false;
     }
 }

@@ -2,12 +2,14 @@
  * Created by TooNies1810 on 5/26/16.
  */
 class Bullet {
-    constructor(x, y, orient, speed, type) {
+    constructor(x, y, orient, speed, type, size, uid) {
         this.x = x;
         this.y = y;
         this.orient = orient;
         this.speed = speed;
         this.type = type;
+        this.size = size;
+        this.uid = uid;
 
         this.image = new Image();
         this.image.src = "RESOURCE/Image/bullet.png";

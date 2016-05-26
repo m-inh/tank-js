@@ -8,6 +8,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 var playerTank = new Array();
+var bulletArr = new Array();
 
 io.on('connection', function (socket) {
     // emit to user info of their tank
@@ -24,7 +25,11 @@ io.on('connection', function (socket) {
     //add user to array
     playerTank.push(tank);
 
-    socket.emit('user', playerTank);// x y
+    var dataNewGame = {
+      'tank' : playerTank,
+      'bullet' : bulletArr
+    };
+    socket.emit('user', dataNewGame);// x y
 
     // emit to other user the new tank
     socket.broadcast.emit('new_enemy', tank);
@@ -64,7 +69,38 @@ io.on('connection', function (socket) {
             "y": y,
             "orient": orient
         };
+        // bulletArr.push(shoot);
+        
+        // console.log("new shoot +++" + shoot.uid);
         socket.broadcast.emit('new_bullet', shoot);
+    });
+
+    socket.on('user_die', function (response) {
+
+
+        // return new life
+        var uid = socket.id;
+        var x = getRandomArbitrary(40, 900);
+        var y = getRandomArbitrary(40, 600);
+        var tank = {
+            'uid': uid,
+            'x': x,
+            'y': y,
+            "orient": 1
+        };
+
+        for (var i = 0; i < playerTank.length; i++) {
+            if (playerTank[i]["uid"] == uid) {
+                playerTank[i] = tank;
+            }
+        }
+
+        // console.log("user die: " + response['uid']);
+        // console.log("user die enemy: " + response['uid_enemy']);
+
+        socket.emit('new_life', tank);
+        socket.broadcast.emit("user_die_update", response);
+        socket.broadcast.emit('player_move', tank);
     });
 
     socket.on('disconnect', function (id) {

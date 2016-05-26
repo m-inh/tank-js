@@ -17,10 +17,12 @@ var enemyType = 2;
 // bullet
 var bulletMgr = new BulletManager();
 var bulletSpeed = 4;
+var bulletSize = 8;
 
 var count = 0;
 var isShootable = true;
 var isStart = false;
+var isMovetable = false;
 
 window.onload = function () {
     var canvas = document.createElement('canvas');
@@ -55,35 +57,45 @@ function gameLoop() {
 }
 
 function update() {
+    // check if tank is destroy
+    // if (tank.isDestroy(bulletMgr)) {
+    //     isMovetable = false;
+    //    
+    //     console.log("die die ");
+    //     // send to sv
+    //     emitDie(tank.uid, tank.enemy_revenge);
+    // }
 
-    switch (orient) {
-        case 1:
-            if (map.isMoveTable(tank.x, tank.y - speed, tankSize) == true) {
-                tank.move(orient);
-            }
-            break;
-        case 2:
-            if (map.isMoveTable(tank.x, tank.y + speed, tankSize) == true) {
-                tank.move(orient);
-            }
-            break;
-        case 3:
-            if (map.isMoveTable(tank.x - speed, tank.y, tankSize) == true) {
-                tank.move(orient);
-            }
-            break;
-        case 4:
-            if (map.isMoveTable(tank.x + speed, tank.y, tankSize) == true) {
-                tank.move(orient);
-            }
-            break;
+    if (isMovetable){
+        switch (orient) {
+            case 1:
+                if (map.isMoveTable(tank.x, tank.y - speed, tankSize) == true) {
+                    tank.move(orient);
+                }
+                break;
+            case 2:
+                if (map.isMoveTable(tank.x, tank.y + speed, tankSize) == true) {
+                    tank.move(orient);
+                }
+                break;
+            case 3:
+                if (map.isMoveTable(tank.x - speed, tank.y, tankSize) == true) {
+                    tank.move(orient);
+                }
+                break;
+            case 4:
+                if (map.isMoveTable(tank.x + speed, tank.y, tankSize) == true) {
+                    tank.move(orient);
+                }
+                break;
+        }
+
+        if (orient != 0) {
+            emitMove(tank.x, tank.y, tank.currOrient, tank.uid);
+        }
     }
 
-    if (orient != 0) {
-        emitMove(tank.x, tank.y, tank.currOrient, tank.uid);
-    }
-
-    bulletMgr.moveAll();
+    bulletMgr.moveAll(map, tank);
 }
 
 function draw(context) {
@@ -119,6 +131,7 @@ window.onkeydown = function (e) {
         case 32: // space
             if (isShootable) {
                 var newBullet = tank.shoot();
+                console.log("xx + " + newBullet.uid);
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
 
@@ -152,23 +165,38 @@ function updateEnemyTank(x, y, orient, uid) {
 var socket = io();
 
 socket.on('user', function (response) {
-    for (var i = 0; i < response.length - 1; i++) {
-        var id = response[i]["uid"];
-        var x = response[i]["x"];
-        var y = response[i]["y"];
-        var orient = response[i]["orient"];
+    // init tanks
+    var tankArr = response["tank"];
+    for (var i = 0; i < tankArr.length - 1; i++) {
+        var id = tankArr[i]["uid"];
+        var x = tankArr[i]["x"];
+        var y = tankArr[i]["y"];
+        var orient = tankArr[i]["orient"];
 
         var newEnemy = new Tank(x, y, speed, enemyType, id);
         newEnemy.currOrient = orient;
         addNewEnemyTank(newEnemy);
     }
 
-    var uid = response[response.length - 1]["uid"];
-    var ux = response[response.length - 1]["x"];
-    var uy = response[response.length - 1]["y"];
+    var uid = tankArr[tankArr.length - 1]["uid"];
+    var ux = tankArr[tankArr.length - 1]["x"];
+    var uy = tankArr[tankArr.length - 1]["y"];
+
+    // init bullet
+    var bullets = response["bullet"];
+    for (var i=0; i<bullets.length; i++){
+        var bullet = bullets[i];
+        var uidBullet = bullet["uid"];
+        var xBullet = bullet["x"];
+        var yBullet = bullet["y"];
+        var orientBullet = bullet["orient"];
+        var newBullet = new Bullet(xBullet, yBullet, orientBullet, bulletSpeed, 2, uidBullet);
+        bulletMgr.addNewBullet(newBullet);
+    }
 
     gameStart(uid, ux, uy);
     isStart = true;
+    isMovetable = true;
 });
 
 socket.on('new_enemy', function (response) {
@@ -197,13 +225,38 @@ socket.on('player_move', function (response) {
 });
 
 socket.on('new_bullet', function (response) {
-    // var uid = response["uid"];
+    var uid = response["uid"];
     var x = response["x"];
     var y = response["y"];
     var orient = response["orient"];
-    var newBullet = new Bullet(x,y,orient,bulletSpeed,2);
+
+    var newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
+
+    // console.log('xxxxxxxxx+++++++++++++++++++++++++++++++++++' + newBullet.uid);
     bulletMgr.addNewBullet(newBullet);
 });
+
+socket.on('user_die_update', function (response) {
+    // var die = {
+    //     "uid": uid,
+    //     "uid_enemy": uidEnemy
+    // };
+    var uidEnemy = response["uid_enemy"];
+    // console.log("bullet.uid: " + uidEnemy);
+    // bonus point to enemy_user
+    bulletMgr.removeBullet(uidEnemy);
+});
+
+socket.on('new_life', function (response) {
+    var id = response["uid"];
+    var x = response["x"];
+    var y = response["y"];
+    var orient = response["orient"];
+    tank = new Tank(x,y,speed,playerType,id);
+    isMovetable = true;
+});
+
+//////////////////////// emit
 
 function emitMove(x, y, orient, uid) {
     var move = {
@@ -216,6 +269,7 @@ function emitMove(x, y, orient, uid) {
 }
 
 function emitShoot(xBullet, yBullet, orientBullet, uid) {
+    // console.log("bullet uid: ++++++++++++" + uid);
     var shoot = {
         "uid": uid,
         "x": xBullet,
@@ -223,4 +277,14 @@ function emitShoot(xBullet, yBullet, orientBullet, uid) {
         "orient": orientBullet
     };
     socket.emit('shoot', shoot);
+}
+
+function emitDie(uid, uidEnemy) {
+    // console.log("uid: " + uid);
+    // console.log("uid_enemy: " + uidEnemy);
+    var die = {
+        "uid": uid,
+        "uid_enemy": uidEnemy
+    };
+    socket.emit('user_die', die);
 }

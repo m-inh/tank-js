@@ -29,7 +29,6 @@ class TankManager{
                 this.tankArr[i].x = newX;
                 this.tankArr[i].y = newY;
                 this.tankArr[i].currOrient = newOrient;
-
             }
         }
     }
