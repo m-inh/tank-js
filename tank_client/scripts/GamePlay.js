@@ -306,6 +306,7 @@ socket.on('best_score', function (response) {
 function emitMove(x, y, orient, uid) {
     var move = {
         "uid": uid,
+        "name": namePlayer,
         "x": x,
         "y": y,
         "orient": orient
