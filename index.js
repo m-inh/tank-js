@@ -48,12 +48,14 @@ io.on('connection', function (socket) {
 
     socket.on('move', function (response) {
         var uid = this.id;
+        var name = response["name"];
         var newX = response["x"];
         var newY = response["y"];
         var newOrient = response["orient"];
 
         var move = {
             "uid": uid,
+            "name": name,
             "y": newY,
             "x": newX,
             "orient": newOrient
