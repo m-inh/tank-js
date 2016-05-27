@@ -1,0 +1,25 @@
+body {
+    background-color: #000;
+}
+
+#top {
+    color: #fff;
+    padding: 20px 0;
+}
+
+#game {
+    width: 100%;
+    height: auto;
+}
+
+#panel {
+    color: #fff;
+}
+
+#panel h3 {
+    margin-top: 0;
+}
+
+#main-app {
+
+}
