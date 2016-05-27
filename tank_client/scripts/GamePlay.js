@@ -309,6 +309,8 @@ function emitDie(uid, uidEnemy, idBullet) {
  * Document is ready
  */
 jQuery(document).ready(function ($) {
+    $('#login').modal('show');
+
     var canvas = $('#game')[0];
     context = canvas.getContext("2d");
     context.fillStyle = '#000000';
