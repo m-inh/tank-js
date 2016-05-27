@@ -98,6 +98,7 @@ io.on('connection', function (socket) {
             } else if (i == bestScoreArr.length - 1) {
                 var score = {
                     "uid": response["uid_enemy"],
+                    "name": response["name"],
                     "score": 1
                 };
                 // console.log("new score: " + i + " " + score);
@@ -107,6 +108,7 @@ io.on('connection', function (socket) {
         if (bestScoreArr.length == 0) {
             var score = {
                 "uid": response["uid_enemy"],
+                "name": response["name"],
                 "score": 1
             };
             // console.log("new score: " + i + " " + score);
