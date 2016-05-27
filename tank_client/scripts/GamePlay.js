@@ -2,6 +2,9 @@
  * Created by TooNies1810 on 5/24/16.
  */
 
+const MAP_WIDTH = 900;
+const MAP_HEIGHT = 700;
+
 var context;
 var tank; // player's tank
 var map;
@@ -30,19 +33,8 @@ var isShootable = true;
 var isStart = false;
 var isMovetable = false;
 
-window.onload = function () {
-    var canvas = document.createElement('canvas');
-    context = canvas.getContext("2d");
-    context.fillStyle = '#000000';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    document.body.appendChild(canvas);
-
-    setInterval(gameLoop, 17);
-};
-
 function gameStart(uid, x, y) {
-    map = new TankMap(900, 700, 20);
+    map = new TankMap(MAP_WIDTH, MAP_HEIGHT, 20);
     tank = new Tank(x, y, speed, playerType, uid);
 }
 
@@ -73,7 +65,7 @@ function update() {
     // }
 
 
-    if (isMovetable){
+    if (isMovetable) {
         switch (orient) {
             case 1:
                 if (map.isMoveTable(tank.x, tank.y - speed, tankSize) == true) {
@@ -163,8 +155,6 @@ window.onkeyup = function (e) {
     orient = 0;
 };
 
-
-//////////////
 function addNewEnemyTank(enemyTank) {
     playerTankMgr.addNewTank(enemyTank);
 }
@@ -209,7 +199,7 @@ socket.on('user', function (response) {
 
     // init bullet
     var bullets = response["bullet"];
-    for (var i=0; i<bullets.length; i++){
+    for (var i = 0; i < bullets.length; i++) {
         var bullet = bullets[i];
         var uidBullet = bullet["uid"];
         var xBullet = bullet["x"];
@@ -278,7 +268,7 @@ socket.on('new_life', function (response) {
     var x = response["x"];
     var y = response["y"];
     var orient = response["orient"];
-    tank = new Tank(x,y,speed,playerType,id);
+    tank = new Tank(x, y, speed, playerType, id);
     isMovetable = true;
 });
 
@@ -314,3 +304,16 @@ function emitDie(uid, uidEnemy, idBullet) {
     };
     socket.emit('user_die', die);
 }
+
+/**
+ * Document is ready
+ */
+jQuery(document).ready(function ($) {
+    var canvas = $('#game')[0];
+    context = canvas.getContext("2d");
+    context.fillStyle = '#000000';
+    canvas.width = MAP_WIDTH;
+    canvas.height = MAP_HEIGHT;
+
+    setInterval(gameLoop, 17);
+});

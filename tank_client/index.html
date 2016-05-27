@@ -2,21 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tank_JS</title>
-    <script type="text/javascript" src="script/socket.io.js"></script>
-    <script type="text/javascript" src="script/functionUltils.js"></script>
-    <script type="text/javascript" src="script/TankManager.js"></script>
-    <script type="text/javascript" src="script/Tank.js"></script>
-    <script type="text/javascript" src="script/Bullet.js"></script>
-    <script type="text/javascript" src="script/BulletManager.js"></script>
-    <script type="text/javascript" src="script/TankMap.js"></script>
-    <script type="text/javascript" src="script/Brick.js"></script>
-    <script type="text/javascript" src="script/BrickManager.js"></script>
-    <script type="text/javascript" src="script/Animation.js"></script>
-    <script type="text/javascript" src="script/AnimationManager.js"></script>
-    <script type="text/javascript" src="script/GamePlay.js"></script>
+    <title>Tank JS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
+<div id="main-app">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div id="top" class="text-center">
+                    <h1>Game Tank</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div id="play-area">
+                    <canvas id="game"></canvas>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div id="panel">
+                    <h3>Top 10</h3>
+
+                    <div class="top10">
+                        <div class="player" data-id="xxxxx">
+                            <span class="name">Tu TV</span>:
+                            <span class="score">100</span>
+                        </div>
+
+                        <div class="player" data-id="xxxxx">
+                            <span class="name">Tu TV</span>:
+                            <span class="score">100</span>
+                        </div>
+
+                        <div class="player" data-id="xxxxx">
+                            <span class="name">Tu TV</span>:
+                            <span class="score">100</span>
+                        </div>
+
+                        <div class="player" data-id="xxxxx">
+                            <span class="name">Tu TV</span>:
+                            <span class="score">100</span>
+                        </div>
+
+                        <div class="player" data-id="xxxxx">
+                            <span class="name">Tu TV</span>:
+                            <span class="score">100</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/socket.io.js"></script>
+<script type="text/javascript" src="scripts/functionUltils.js"></script>
+<script type="text/javascript" src="scripts/TankManager.js"></script>
+<script type="text/javascript" src="scripts/Tank.js"></script>
+<script type="text/javascript" src="scripts/Bullet.js"></script>
+<script type="text/javascript" src="scripts/BulletManager.js"></script>
+<script type="text/javascript" src="scripts/TankMap.js"></script>
+<script type="text/javascript" src="scripts/Brick.js"></script>
+<script type="text/javascript" src="scripts/BrickManager.js"></script>
+<script type="text/javascript" src="scripts/Animation.js"></script>
+<script type="text/javascript" src="scripts/AnimationManager.js"></script>
+<script type="text/javascript" src="scripts/GamePlay.js"></script>
 </body>
 </html>
