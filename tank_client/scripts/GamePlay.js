@@ -309,7 +309,23 @@ function emitDie(uid, uidEnemy, idBullet) {
  * Document is ready
  */
 jQuery(document).ready(function ($) {
-    $('#login').modal('show');
+    var modal_login = $('#login');
+    modal_login.modal('show');
+    modal_login.on('shown.bs.modal', function () {
+        $('#name').focus()
+    });
+
+    modal_login.on('hidden.bs.modal', function () {
+        var name_player = $('#name').val();
+
+        if (name_player == '') {
+            modal_login.modal('show');
+            return;
+        }
+
+        // Khởi tạo người chơi tại đây
+        
+    });
 
     var canvas = $('#game')[0];
     context = canvas.getContext("2d");
