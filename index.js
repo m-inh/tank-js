@@ -11,30 +11,36 @@ var playerTank = new Array();
 var bulletArr = new Array();
 
 io.on('connection', function (socket) {
-    // emit to user info of their tank
-    var uid = socket.id;
-    var x = getRandomArbitrary(40, 900);
-    var y = getRandomArbitrary(40, 600);
-    var tank = {
-        'uid': uid,
-        'x': x,
-        'y': y,
-        "orient": 1
-    };
 
-    //add user to array
-    playerTank.push(tank);
+    socket.on('login', function (name) {
+        // emit to user info of their tank
+        var uid = this.id;
+        var x = getRandomArbitrary(40, 900);
+        var y = getRandomArbitrary(40, 600);
 
-    var dataNewGame = {
-      'tank' : playerTank,
-      'bullet' : bulletArr
-    };
-    socket.emit('user', dataNewGame);// x y
+        var tank = {
+            'uid': uid,
+            'name': name,
+            'x': x,
+            'y': y,
+            "orient": 1
+        };
 
-    // emit to other user the new tank
-    socket.broadcast.emit('new_enemy', tank);
+        //add user to array
+        playerTank.push(tank);
 
-    console.log('user connected: ' + uid);
+        var dataNewGame = {
+            'tank': playerTank,
+            'bullet': bulletArr
+        };
+
+        socket.emit('user', dataNewGame);// x y
+
+        // emit to other user the new tank
+        socket.broadcast.emit('new_enemy', tank);
+
+        console.log('user connected: ' + uid);
+    });
 
     socket.on('move', function (response) {
         var uid = this.id;

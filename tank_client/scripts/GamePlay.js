@@ -33,9 +33,10 @@ var isShootable = true;
 var isStart = false;
 var isMovetable = false;
 
-function gameStart(uid, x, y) {
+function gameStart(uid, x, y, name) {
     map = new TankMap(MAP_WIDTH, MAP_HEIGHT, 20);
     tank = new Tank(x, y, speed, playerType, uid);
+    tank.name = name;
 }
 
 function gameLoop() {
@@ -140,7 +141,7 @@ window.onkeydown = function (e) {
             if (isShootable) {
                 var newBullet = tank.shoot();
 
-                console.log("create new bullet: " + newBullet.id);
+                // console.log("create new bullet: " + newBullet.id);
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
 
@@ -184,19 +185,23 @@ socket.on('user', function (response) {
     var tankArr = response["tank"];
     for (var i = 0; i < tankArr.length - 1; i++) {
         var id = tankArr[i]["uid"];
+        var name = tankArr[i]["name"];
         var x = tankArr[i]["x"];
         var y = tankArr[i]["y"];
         var orient = tankArr[i]["orient"];
 
         var newEnemy = new Tank(x, y, speed, enemyType, id);
         newEnemy.currOrient = orient;
+        newEnemy.name = name;
         addNewEnemyTank(newEnemy);
     }
 
     var uid = tankArr[tankArr.length - 1]["uid"];
+    var nameTank = tankArr[tankArr.length - 1]["name"];
     var ux = tankArr[tankArr.length - 1]["x"];
     var uy = tankArr[tankArr.length - 1]["y"];
 
+    console.log(nameTank);
     // init bullet
     var bullets = response["bullet"];
     for (var i = 0; i < bullets.length; i++) {
@@ -209,19 +214,21 @@ socket.on('user', function (response) {
         bulletMgr.addNewBullet(newBullet);
     }
 
-    gameStart(uid, ux, uy);
+    gameStart(uid, ux, uy, nameTank);
     isStart = true;
     isMovetable = true;
 });
 
 socket.on('new_enemy', function (response) {
     var id = response["uid"];
+    var name = response["name"];
     var x = response["x"];
     var y = response["y"];
     var orient = response["orient"];
 
     var newEnemy = new Tank(x, y, speed, enemyType, id);
     newEnemy.currOrient = orient;
+    newEnemy.name = name;
     addNewEnemyTank(newEnemy);
 });
 
@@ -324,7 +331,8 @@ jQuery(document).ready(function ($) {
         }
 
         // Khởi tạo người chơi tại đây
-        
+        // console.log(name_player);
+        socket.emit('login', name_player);
     });
 
     var canvas = $('#game')[0];
