@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d0c70c4-1ce9-4777-8050-f8b0cf0f2e22" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tank_client/RESOURCE/Image/brick.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tank_client/script/Animation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tank_client/script/AnimationManager.js" />
+    <list default="true" id="9d0c70c4-1ce9-4777-8050-f8b0cf0f2e22" name="Default" comment="animation ok">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/index.html" afterPath="$PROJECT_DIR$/tank_client/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/Brick.js" afterPath="$PROJECT_DIR$/tank_client/script/Brick.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/BrickManager.js" afterPath="$PROJECT_DIR$/tank_client/script/BrickManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/Bullet.js" afterPath="$PROJECT_DIR$/tank_client/script/Bullet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/BulletManager.js" afterPath="$PROJECT_DIR$/tank_client/script/BulletManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/GamePlay.js" afterPath="$PROJECT_DIR$/tank_client/script/GamePlay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/Tank.js" afterPath="$PROJECT_DIR$/tank_client/script/Tank.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/TankManager.js" afterPath="$PROJECT_DIR$/tank_client/script/TankManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/TankMap.js" afterPath="$PROJECT_DIR$/tank_client/script/TankMap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tank_client/script/functionUltils.js" afterPath="$PROJECT_DIR$/tank_client/script/functionUltils.js" />
     </list>
     <ignored path="Tank_js.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,11 +23,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#45#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="functionUltils.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tank_client/script/functionUltils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#45#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Animation.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tank_client/script/Animation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+            <state relative-caret-position="240">
+              <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc;n#Animation#0" expanded="false" />
               </folding>
@@ -49,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GamePlay.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GamePlay.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tank_client/script/GamePlay.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="109" column="14" selection-start-line="109" selection-start-column="14" selection-end-line="109" selection-end-column="14" />
+            <state relative-caret-position="-1773">
+              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,18 +72,18 @@
       <file leaf-file-name="Tank.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tank_client/script/Tank.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
+            <state relative-caret-position="-931">
               <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TankMap.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TankMap.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tank_client/script/TankMap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state relative-caret-position="300">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -328,7 +338,7 @@
       <workItem from="1464232749474" duration="10079000" />
       <workItem from="1464248957468" duration="2078000" />
       <workItem from="1464255018387" duration="3776000" />
-      <workItem from="1464321533790" duration="9896000" />
+      <workItem from="1464321533790" duration="10090000" />
     </task>
     <task id="LOCAL-00001" summary="add user id">
       <created>1464201621537</created>
@@ -365,11 +375,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464260212464</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="animation ok">
+      <created>1464333273226</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1464333273226</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50403000" />
+    <option name="totallyTimeSpent" value="50597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="42" y="23" width="1378" height="837" extended-state="0" />
@@ -381,7 +398,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4283802" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4295302" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -410,7 +427,9 @@
     <MESSAGE value="format code" />
     <MESSAGE value="bullet" />
     <MESSAGE value="fix bug bullet" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug bullet" />
+    <MESSAGE value="animation ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="animation ok" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -765,16 +784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="60" column="34" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tank_client/script/AnimationManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -792,34 +801,6 @@
           <folding>
             <element signature="n#!!doc;n#Bullet#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tank_client/script/functionUltils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tank_client/script/Animation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
-          <folding>
-            <element signature="n#!!doc;n#Animation#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tank_client/script/Tank.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,18 +824,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tank_client/script/TankMap.js">
+    <entry file="file://$PROJECT_DIR$/tank_client/script/Animation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="240">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding>
+            <element signature="n#!!doc;n#Animation#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tank_client/script/functionUltils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tank_client/script/GamePlay.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="109" column="14" selection-start-line="109" selection-start-column="14" selection-end-line="109" selection-end-column="14" />
+        <state relative-caret-position="-1773">
+          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tank_client/script/Tank.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-931">
+          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tank_client/script/TankMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
