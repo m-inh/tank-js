@@ -358,6 +358,10 @@ jQuery(document).ready(function ($) {
         socket.emit('login', name_player);
     });
 
+    socket.on('best_score', function (best_score) {
+        update_best_score(best_score);
+    });
+
     var canvas = $('#game')[0];
     context = canvas.getContext("2d");
     context.fillStyle = '#000000';
@@ -365,4 +369,26 @@ jQuery(document).ready(function ($) {
     canvas.height = MAP_HEIGHT;
 
     setInterval(gameLoop, 17);
+
+    function update_best_score(data_arr) {
+        var html_best_score = '';
+
+        for (var i = 0; i < data_arr.length; i++) {
+            var player = data_arr[i];
+            var current = '';
+
+            if (player.uid == tank.uid) {
+                current = 'active';
+            }
+
+            var html_player = '<div class="player ' + current + '" data-id="' + player.uid + '">' +
+                '<span class="name">' + player.name + '</span>: ' +
+                '<span class="score">' + player.score + '</span>' +
+                '</div>';
+
+            html_best_score += html_player;
+        }
+
+        $('.top10').html(html_best_score);
+    }
 });
