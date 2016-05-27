@@ -26,6 +26,25 @@ class TankManager{
         this.tankArr = tempArr;
     }
 
+    getNameTankByUid(uid) {
+        for (var i = 0; i < this.tankArr.length; i++) {
+            var tempTank = this.tankArr[i];
+            if (tempTank.uid == uid) {
+                return tempTank.name;
+            }
+        }
+    }
+
+    updateTankRevenge(uid) {
+        for (var i = 0; i < this.tankArr.length; i++) {
+            if (this.tankArr[i].uid == uid) {
+                this.tankArr[i].isRevenge = true;
+            } else {
+                this.tankArr[i].isRevenge = false;
+            }
+        }
+    }
+
     updateTank(newX, newY, newOrient, uid){
         for (var i = 0; i < this.tankArr.length; i++){
             if (this.tankArr[i].uid == uid){

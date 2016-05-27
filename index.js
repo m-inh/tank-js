@@ -39,6 +39,7 @@ io.on('connection', function (socket) {
         };
 
         socket.emit('user', dataNewGame);// x y
+        socket.emit('best_score', bestScoreArr);
 
         // emit to other user the new tank
         socket.broadcast.emit('new_enemy', tank);
@@ -100,7 +101,7 @@ io.on('connection', function (socket) {
             } else if (i == bestScoreArr.length - 1) {
                 var score = {
                     "uid": response["uid_enemy"],
-                    "name": response["name"],
+                    "name": response["name_enemy"],
                     "score": 1
                 };
                 // console.log("new score: " + i + " " + score);
@@ -110,7 +111,7 @@ io.on('connection', function (socket) {
         if (bestScoreArr.length == 0) {
             var score = {
                 "uid": response["uid_enemy"],
-                "name": response["name"],
+                "name": response["name_enemy"],
                 "score": 1
             };
             // console.log("new score: " + i + " " + score);
@@ -144,6 +145,7 @@ io.on('connection', function (socket) {
         var y = getRandomArbitrary(40, 600);
         var tank = {
             'uid': uid,
+            'name': response["name"],
             'x': x,
             'y': y,
             "orient": 1

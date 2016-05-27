@@ -25,6 +25,7 @@ class BulletManager{
                 isMovetable = false;
                 tank.isAlive = false;
                 tank.enemy_revenge = bullet.uid;
+                player_revenge = bullet.uid;
 
                 explore(tank.x, tank.y, 1);
                 emitDie(tank.uid, bullet.uid, bullet.id);

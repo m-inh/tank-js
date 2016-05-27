@@ -14,6 +14,7 @@ class Tank{
         this.image = new Image();
         this.currOrient = 1;
         this.enemy_revenge = "";
+        this.isRevenge = false;
         this.isAlive = true;
 
         this.size = tankSize;
@@ -79,7 +80,12 @@ class Tank{
 
             context.drawImage(this.image, this.x, this.y);
             context.font="15px Georgia";
-            context.fillStyle = "#ffffff";
+            if (!this.isRevenge) {
+                context.fillStyle = "#ffffff";
+            } else {
+                context.fillStyle = "#FF0000";
+            }
+
             context.fillText(this.name, this.x, this.y - 10);
             // console.log(this.name.width);
         }

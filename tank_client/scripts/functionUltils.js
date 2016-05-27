@@ -47,3 +47,7 @@ image_up_enemy_up_4.src = "RESOURCE/Image/player_green_4.png";
 // map
 var img_brick = new Image();
 img_brick.src = "RESOURCE/Image/brick.png";
+
+// sound
+var audio_tank_explore = new Audio('RESOURCE/sound/explosion_tank.wav');
+var audio_bullet_explore = new Audio('RESOURCE/sound/explosion.wav');

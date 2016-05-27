@@ -14,6 +14,7 @@ var speed = 3;
 var orient = 0;
 var tankSize = 33;
 var playerTankMgr = new TankManager();
+var player_revenge = "";
 
 var playerType = 1;
 var enemyType = 2;
@@ -57,15 +58,8 @@ function gameLoop() {
 }
 
 function update() {
-    // check if tank is destroy
-    // if (tank.isDestroy(bulletMgr)) {
-    //     isMovetable = false;
-    //    
-    //     console.log("die die ");
-    //     // send to sv
-    //     emitDie(tank.uid, tank.enemy_revenge);
-    // }
-
+    // update tank revenge
+    playerTankMgr.updateTankRevenge(player_revenge);
 
     if (isMovetable) {
         switch (orient) {
@@ -178,13 +172,13 @@ function explore(x, y, type) {
     animMgr.addNewAnim(anim);
 
     // playing sound
+    var audio;
     if (type == 1) {
-        var audio = new Audio('RESOURCE/sound/explosion_tank.wav');
-        audio.play();
+        audio = audio_tank_explore;
     } else if (type == 2) {
-        var audio = new Audio('RESOURCE/sound/explosion.wav');
-        audio.play();
+        audio = audio_bullet_explore;
     }
+    audio.play();
 }
 
 ///////////////////////////// socket io
@@ -288,6 +282,7 @@ socket.on('new_life', function (response) {
     var orient = response["orient"];
     tank = new Tank(x, y, speed, playerType, id);
     tank.name = namePlayer;
+    tank.enemy_revenge = player_revenge;
     isMovetable = true;
 });
 
@@ -327,10 +322,12 @@ function emitShoot(xBullet, yBullet, orientBullet, uid, id) {
 
 function emitDie(uid, uidEnemy, idBullet) {
     // console.log("idbullet send: " + idBullet);
+    var nameEnemy = playerTankMgr.getNameTankByUid(uidEnemy);
     var die = {
         "uid": uid,
         "name": namePlayer,
         "uid_enemy": uidEnemy,
+        "name_enemy": nameEnemy,
         "id_bullet": idBullet
     };
     socket.emit('user_die', die);
