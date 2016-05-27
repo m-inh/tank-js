@@ -7,6 +7,7 @@ const MAP_HEIGHT = 700;
 
 var context;
 var tank; // player's tank
+var namePlayer;
 var map;
 var speed = 3;
 // var tankSpeed = 1;
@@ -201,7 +202,8 @@ socket.on('user', function (response) {
     var ux = tankArr[tankArr.length - 1]["x"];
     var uy = tankArr[tankArr.length - 1]["y"];
 
-    console.log(nameTank);
+    namePlayer = nameTank;
+    // console.log(nameTank);
     // init bullet
     var bullets = response["bullet"];
     for (var i = 0; i < bullets.length; i++) {
@@ -253,7 +255,7 @@ socket.on('new_bullet', function (response) {
     var y = response["y"];
     var orient = response["orient"];
 
-    console.log("new bullet receive: " + id);
+    // console.log("new bullet receive: " + id);
 
     var newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
     // newBullet.id = id;
@@ -265,7 +267,7 @@ socket.on('user_die_update', function (response) {
     var uidEnemy = response["uid_enemy"];
     var idBullet = response["id_bullet"];
 
-    console.log("idBullet: " + idBullet);
+    // console.log("idBullet: " + idBullet);
     // bonus point to enemy_user
     bulletMgr.removeBullet(uidEnemy, idBullet);
 });
@@ -276,7 +278,18 @@ socket.on('new_life', function (response) {
     var y = response["y"];
     var orient = response["orient"];
     tank = new Tank(x, y, speed, playerType, id);
+    tank.name = namePlayer;
     isMovetable = true;
+});
+
+socket.on('best_score', function (response) {
+    for (var i = 0; i < response.length; i++) {
+        var uid = response[i]["uid"];
+        var name = response[i]["name"];
+        var score = response[i]["score"];
+        // console.log(uid+" " + " " + score);
+    }
+    // console.log("///////////////////////////////");
 });
 
 //////////////////////// emit

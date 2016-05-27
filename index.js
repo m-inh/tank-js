@@ -7,8 +7,12 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var _ = require('lodash');
+
 var playerTank = new Array();
 var bulletArr = new Array();
+
+var bestScoreArr = new Array();
 
 io.on('connection', function (socket) {
 
@@ -78,13 +82,57 @@ io.on('connection', function (socket) {
             "orient": orient
         };
         // bulletArr.push(shoot);
-        
+
         // console.log("new shoot +++" + shoot.uid);
         socket.broadcast.emit('new_bullet', shoot);
     });
 
     socket.on('user_die', function (response) {
+        // console.log(response["uid_enemy"]);
+        for (var i = 0; i < bestScoreArr.length; i++) {
+            var tempObj = bestScoreArr[i];
+            if (tempObj["uid"] == response["uid_enemy"]) {
+                tempObj["score"]++;
+                // console.log(tempObj["score"]);
+                break;
+            } else if (i == bestScoreArr.length - 1) {
+                var score = {
+                    "uid": response["uid_enemy"],
+                    "score": 1
+                };
+                // console.log("new score: " + i + " " + score);
+                bestScoreArr.push(score);
+            }
+        }
+        if (bestScoreArr.length == 0) {
+            var score = {
+                "uid": response["uid_enemy"],
+                "score": 1
+            };
+            // console.log("new score: " + i + " " + score);
+            bestScoreArr.push(score);
+        }
 
+        // if user left game and has no top -> remove score
+        // for (var i=0; i<)
+
+        // if arr has >= 2 item, sort
+        if (bestScoreArr.length > 1) {
+            // sort
+            for (var i = 0; i < bestScoreArr.length; i++) {
+                for (var j = 0; j < bestScoreArr.length; j++) {
+
+                    if (bestScoreArr[i]["score"] > bestScoreArr[j]["score"]) {
+                        var tempScore = bestScoreArr[i];
+                        bestScoreArr[i] = bestScoreArr[j];
+                        bestScoreArr[j] = tempScore;
+                    }
+                }
+            }
+        }
+
+        socket.emit('best_score', bestScoreArr);
+        socket.broadcast.emit('best_score', bestScoreArr);
 
         // return new life
         var uid = socket.id;
@@ -121,6 +169,25 @@ io.on('connection', function (socket) {
         }
         playerTank = tempTankArr;
         socket.broadcast.emit('user_disconnect', uidDis);
+
+        // if user left game and has no top -> remove score
+        // find index of user in array
+        if (bestScoreArr.length > 5) {
+            var tempScoreArr = new Array();
+            for (var i = 5; i < bestScoreArr.length; i++) {
+                if (bestScoreArr[i]["uid"] == uidDis) {
+                    // remove user score
+                    for (var j = 0; j < i; j++) {
+                        tempScoreArr.push(bestScoreArr[j]);
+                    }
+                    for (var k = i + 1; k < bestScoreArr.length; k++) {
+                        tempScoreArr.push(bestScoreArr[k]);
+                    }
+                }
+            }
+            bestScoreArr = tempScoreArr;
+        }
+
         console.log('user disconnected: ' + uidDis);
     });
 });
