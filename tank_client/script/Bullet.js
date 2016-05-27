@@ -10,9 +10,13 @@ class Bullet {
         this.type = type;
         this.size = size;
         this.uid = uid;
+        this.id = bulletID++;
 
-        this.image = new Image();
-        this.image.src = "RESOURCE/Image/bullet.png";
+        this.image = img_bullet;
+    }
+
+    setID(id) {
+        this.id = id;
     }
 
     move() {

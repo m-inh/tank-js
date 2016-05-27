@@ -60,11 +60,13 @@ io.on('connection', function (socket) {
 
     socket.on('shoot', function (response) {
         var uid = response["uid"];
+        var id = response["id_bullet"];
         var x = response["x"];
         var y = response["y"];
         var orient = response["orient"];
         var shoot = {
             "uid": uid,
+            "id_bullet": id,
             "x": x,
             "y": y,
             "orient": orient

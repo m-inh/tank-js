@@ -30,6 +30,14 @@ class TankMap{
                 }
             }
         }
+
+        var tempBrick1 = new Brick(200, 150, this.size);
+        var tempBrick2 = new Brick(230, 400, this.size);
+        var tempBrick3 = new Brick(180, 120, this.size);
+
+        this.brickMgr.addBrick(tempBrick1);
+        this.brickMgr.addBrick(tempBrick2);
+        this.brickMgr.addBrick(tempBrick3);
     }
 
     draw(context){

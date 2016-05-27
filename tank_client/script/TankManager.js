@@ -16,8 +16,11 @@ class TankManager{
     removeTank(uid){
         var tempArr = new Array();
         for (var i = 0; i < this.tankArr.length; i++){
-            if (this.tankArr[i].uid != uid){
+            var tempTank = this.tankArr[i];
+            if (tempTank.uid != uid) {
                 tempArr.push(this.tankArr[i]);
+            } else {
+                // explore(tempTank.x, tempTank.y, 1);
             }
         }
         this.tankArr = tempArr;

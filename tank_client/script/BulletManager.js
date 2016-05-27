@@ -26,7 +26,8 @@ class BulletManager{
                 tank.isAlive = false;
                 tank.enemy_revenge = bullet.uid;
 
-                emitDie(tank.uid, bullet.uid);
+                explore(tank.x, tank.y, 1);
+                emitDie(tank.uid, bullet.uid, bullet.id);
             } else if (map.isMoveTable(bullet.x, bullet.y, bulletSize) == false){
                 isDestroyBullet = true;
             }
@@ -34,17 +35,22 @@ class BulletManager{
             if (isDestroyBullet == false){
                 this.bulletArr[i].move();
                 tempBulletArr.push(bullet);
+            } else {
+                explore(bullet.x, bullet.y, 2);
             }
 
         }
         this.bulletArr = tempBulletArr;
     }
 
-    removeBullet(uid){
+    removeBullet(uid, idBullet) {
         var tempBulletArr = new Array();
         for (var i=0; i<this.bulletArr.length; i++){
             var bullet = this.bulletArr[i];
-            if (bullet.uid != uid){
+            if (bullet.uid == uid && bullet.id == idBullet) {
+                explore(bullet.x, bullet.y, 1);
+                // explore(bullet.x, bullet.y, 2);
+            } else {
                 tempBulletArr.push(bullet);
             }
         }

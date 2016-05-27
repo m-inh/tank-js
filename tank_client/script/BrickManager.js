@@ -23,11 +23,11 @@ class BrickManager{
         for (var i = 0; i < this.brickArr.length; i++){
             if (this.brickArr[i].isInside(x,y,size) == true){
 
-                console.log("tank x: " + x);
-                console.log("tank y: " + y);
-                console.log("tank size: " + size);
-                console.log("brick x: " + this.brickArr[i].x);
-                console.log("brick y: " + this.brickArr[i].y);
+                // console.log("tank x: " + x);
+                // console.log("tank y: " + y);
+                // console.log("tank size: " + size);
+                // console.log("brick x: " + this.brickArr[i].x);
+                // console.log("brick y: " + this.brickArr[i].y);
                 return false;
             }
         }

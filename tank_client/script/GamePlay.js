@@ -18,8 +18,14 @@ var enemyType = 2;
 var bulletMgr = new BulletManager();
 var bulletSpeed = 4;
 var bulletSize = 8;
+var bulletID = 0;
+
+// animation
+var animMgr = new AnimationManager();
+var animTime = 2;
 
 var count = 0;
+var countAnim = 0;
 var isShootable = true;
 var isStart = false;
 var isMovetable = false;
@@ -36,7 +42,7 @@ window.onload = function () {
 };
 
 function gameStart(uid, x, y) {
-    map = new TankMap(1000, 700, 20);
+    map = new TankMap(900, 700, 20);
     tank = new Tank(x, y, speed, playerType, uid);
 }
 
@@ -65,6 +71,7 @@ function update() {
     //     // send to sv
     //     emitDie(tank.uid, tank.enemy_revenge);
     // }
+
 
     if (isMovetable){
         switch (orient) {
@@ -101,13 +108,22 @@ function update() {
 function draw(context) {
     // xoa nen
     context.fillStyle = '#000000';
-    context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    context.fillRect(0, 0, 1440, 900);
 
     // draw obj
     map.draw(context);
     bulletMgr.drawAll(context);
     tank.draw(context);
     playerTankMgr.drawAll(context);
+
+    // run anim
+    countAnim++;
+    if (countAnim > animTime) {
+
+        // chay anim
+        animMgr.runAllAnim(context);
+        countAnim = 0;
+    }
 }
 
 window.onkeydown = function (e) {
@@ -131,12 +147,13 @@ window.onkeydown = function (e) {
         case 32: // space
             if (isShootable) {
                 var newBullet = tank.shoot();
-                console.log("xx + " + newBullet.uid);
+
+                console.log("create new bullet: " + newBullet.id);
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
 
 
-                emitShoot(newBullet.x, newBullet.y, newBullet.orient, tank.uid);
+                emitShoot(newBullet.x, newBullet.y, newBullet.orient, tank.uid, newBullet.id);
             }
             break;
     }
@@ -160,6 +177,14 @@ function updateEnemyTank(x, y, orient, uid) {
     playerTankMgr.updateTank(x, y, orient, uid);
 }
 
+function explore(x, y, type) {
+    // add ner animation
+    // 1: tank
+    // 2: bullet
+
+    var anim = new Animation(x, y, type);
+    animMgr.addNewAnim(anim);
+}
 
 ///////////////////////////// socket io
 var socket = io();
@@ -226,25 +251,26 @@ socket.on('player_move', function (response) {
 
 socket.on('new_bullet', function (response) {
     var uid = response["uid"];
+    var id = response["id_bullet"];
     var x = response["x"];
     var y = response["y"];
     var orient = response["orient"];
 
-    var newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
+    console.log("new bullet receive: " + id);
 
-    // console.log('xxxxxxxxx+++++++++++++++++++++++++++++++++++' + newBullet.uid);
+    var newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
+    // newBullet.id = id;
+    newBullet.setID(id);
     bulletMgr.addNewBullet(newBullet);
 });
 
 socket.on('user_die_update', function (response) {
-    // var die = {
-    //     "uid": uid,
-    //     "uid_enemy": uidEnemy
-    // };
     var uidEnemy = response["uid_enemy"];
-    // console.log("bullet.uid: " + uidEnemy);
+    var idBullet = response["id_bullet"];
+
+    console.log("idBullet: " + idBullet);
     // bonus point to enemy_user
-    bulletMgr.removeBullet(uidEnemy);
+    bulletMgr.removeBullet(uidEnemy, idBullet);
 });
 
 socket.on('new_life', function (response) {
@@ -268,10 +294,10 @@ function emitMove(x, y, orient, uid) {
     socket.emit('move', move);
 }
 
-function emitShoot(xBullet, yBullet, orientBullet, uid) {
-    // console.log("bullet uid: ++++++++++++" + uid);
+function emitShoot(xBullet, yBullet, orientBullet, uid, id) {
     var shoot = {
         "uid": uid,
+        "id_bullet": id,
         "x": xBullet,
         "y": yBullet,
         "orient": orientBullet
@@ -279,12 +305,12 @@ function emitShoot(xBullet, yBullet, orientBullet, uid) {
     socket.emit('shoot', shoot);
 }
 
-function emitDie(uid, uidEnemy) {
-    // console.log("uid: " + uid);
-    // console.log("uid_enemy: " + uidEnemy);
+function emitDie(uid, uidEnemy, idBullet) {
+    // console.log("idbullet send: " + idBullet);
     var die = {
         "uid": uid,
-        "uid_enemy": uidEnemy
+        "uid_enemy": uidEnemy,
+        "id_bullet": idBullet
     };
     socket.emit('user_die', die);
 }
