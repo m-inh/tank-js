@@ -132,6 +132,14 @@ http.listen(3000, function () {
 
 //////////////////// utils
 
+/**
+ *
+ * @param min
+ * @param max
+ * @returns {*}
+ *
+ * @Todo Fix bug khi vào đúng viên gạch
+ */
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
