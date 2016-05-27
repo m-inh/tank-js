@@ -176,6 +176,15 @@ function explore(x, y, type) {
 
     var anim = new Animation(x, y, type);
     animMgr.addNewAnim(anim);
+
+    // playing sound
+    if (type == 1) {
+        var audio = new Audio('RESOURCE/sound/explosion_tank.wav');
+        audio.play();
+    } else if (type == 2) {
+        var audio = new Audio('RESOURCE/sound/explosion.wav');
+        audio.play();
+    }
 }
 
 ///////////////////////////// socket io
@@ -319,6 +328,7 @@ function emitDie(uid, uidEnemy, idBullet) {
     // console.log("idbullet send: " + idBullet);
     var die = {
         "uid": uid,
+        "name": namePlayer,
         "uid_enemy": uidEnemy,
         "id_bullet": idBullet
     };
