@@ -34,10 +34,16 @@ class TankMap{
         var tempBrick1 = new Brick(200, 150, this.size);
         var tempBrick2 = new Brick(230, 400, this.size);
         var tempBrick3 = new Brick(180, 120, this.size);
+        var tempBrick4 = new Brick(280, 520, this.size);
+        var tempBrick5 = new Brick(620, 320, this.size);
+        var tempBrick6 = new Brick(780, 420, this.size);
 
         this.brickMgr.addBrick(tempBrick1);
         this.brickMgr.addBrick(tempBrick2);
         this.brickMgr.addBrick(tempBrick3);
+        this.brickMgr.addBrick(tempBrick4);
+        this.brickMgr.addBrick(tempBrick5);
+        this.brickMgr.addBrick(tempBrick6);
     }
 
     draw(context){
