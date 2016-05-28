@@ -7,6 +7,20 @@ body {
     padding: 20px 0;
 }
 
+.top10 .player:first-child {
+    color: #ffff00;
+    font-size: 120%;
+}
+
+.top10 .player.active::before {
+    content: '*';
+    display: inline-block;
+    padding-right: 5px;
+    margin-left: -10px;
+    position: relative;
+    top: 5px;
+}
+
 #game {
     width: 100%;
     height: auto;
