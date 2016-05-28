@@ -13,6 +13,9 @@ class Bullet {
         this.id = bulletID++;
 
         this.image = img_bullet;
+
+        var audio_shoot = audio_tank_shoot;
+        audio_shoot.play();
     }
 
     setID(id) {

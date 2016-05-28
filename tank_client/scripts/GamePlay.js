@@ -27,7 +27,7 @@ var bulletID = 0;
 
 // animation
 var animMgr = new AnimationManager();
-var animTime = 2;
+var animTime = 3;
 
 var count = 0;
 var countAnim = 0;
@@ -36,6 +36,10 @@ var isStart = false;
 var isMovetable = false;
 
 function gameStart(uid, x, y, name) {
+
+    var audio_start = audio_start_game;
+    audio_start.play();
+
     map = new TankMap(MAP_WIDTH, MAP_HEIGHT, 20);
     tank = new Tank(x, y, speed, playerType, uid);
     tank.name = name;
@@ -139,7 +143,6 @@ window.onkeydown = function (e) {
                 // console.log("create new bullet: " + newBullet.id);
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
-
 
                 emitShoot(newBullet.x, newBullet.y, newBullet.orient, tank.uid, newBullet.id);
             }

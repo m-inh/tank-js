@@ -14,13 +14,16 @@ var bulletArr = new Array();
 
 var bestScoreArr = new Array();
 
+const MAP_WIDTH = 900;
+const MAP_HEIGHT = 700;
+
 io.on('connection', function (socket) {
 
     socket.on('login', function (name) {
         // emit to user info of their tank
         var uid = this.id;
-        var x = getRandomArbitrary(40, 900);
-        var y = getRandomArbitrary(40, 600);
+        var x = getRandomArbitrary(40, MAP_WIDTH - 40);
+        var y = getRandomArbitrary(40, MAP_HEIGHT - 40);
 
         var tank = {
             'uid': uid,
@@ -141,8 +144,8 @@ io.on('connection', function (socket) {
 
         // return new life
         var uid = socket.id;
-        var x = getRandomArbitrary(40, 900);
-        var y = getRandomArbitrary(40, 600);
+        var x = getRandomArbitrary(40, MAP_WIDTH - 40);
+        var y = getRandomArbitrary(40, MAP_HEIGHT - 40);
         var tank = {
             'uid': uid,
             'name': response["name"],
