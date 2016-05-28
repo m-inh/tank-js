@@ -120,19 +120,19 @@ function draw(context) {
 
 window.onkeydown = function (e) {
     switch (e.keyCode) {
-        case 65: // a
+        case 37: // left
             // console.log("a");
             orient = 3;
             break;
-        case 68: // d
+        case 39: // right
             // console.log("d");
             orient = 4;
             break;
-        case 83: //s
+        case 40: // down
             // console.log("s");
             orient = 2;
             break;
-        case 87: // w
+        case 38: // up
             // console.log("w");
             orient = 1;
             break;
