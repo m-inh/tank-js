@@ -7,6 +7,10 @@ body {
     padding: 20px 0;
 }
 
+.top10 {
+    overflow: hidden;
+}
+
 .top10 .player:first-child {
     color: #ffff00;
     font-size: 120%;
