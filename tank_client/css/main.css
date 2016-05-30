@@ -8,6 +8,7 @@ body {
 }
 
 .top10 {
+    max-height: 700px;
     overflow: hidden;
 }
 

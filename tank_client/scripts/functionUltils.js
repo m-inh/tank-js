@@ -49,7 +49,7 @@ var img_brick = new Image();
 img_brick.src = "RESOURCE/Image/brick.png";
 
 // sound
-var new_best = new Audio('RESOURCE/sound/eatBonus1.wav');
+var new_player = new Audio('RESOURCE/sound/eatBonus1.wav');
 var audio_start_game = new Audio('RESOURCE/sound/enter_game.wav');
 var audio_tank_shoot = new Audio('RESOURCE/sound/shoot.wav');
 var audio_tank_explore = new Audio('RESOURCE/sound/explosion_tank.wav');

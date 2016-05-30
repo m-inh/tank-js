@@ -238,6 +238,9 @@ socket.on('new_enemy', function (response) {
     newEnemy.currOrient = orient;
     newEnemy.name = name;
     addNewEnemyTank(newEnemy);
+
+    var newPlayerSound = new_player;
+    newPlayerSound.play();
 });
 
 socket.on('user_disconnect', function (uid) {
