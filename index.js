@@ -207,8 +207,8 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/tank_client/index.html');
 });
 
-http.listen(3001, function () {
-    console.log('listening on *:3001');
+http.listen(3000, function () {
+    console.log('listening on *:3000');
 });
 
 
