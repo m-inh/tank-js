@@ -9,3 +9,6 @@ npm install
 ```
 node index.js
 ```
+
+## Chơi
+Truy cập brownser tới host: localhost:3000/
