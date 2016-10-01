@@ -13,4 +13,4 @@ node index.js
 ```
 
 ## Chơi
-Truy cập brownser tới host: localhost:3000/
+Truy cập browser tới host: localhost:3000/
