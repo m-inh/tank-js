@@ -2,12 +2,11 @@
  * Created by TooNies1810 on 5/25/16.
  */
 
-var express = require('express');
+const express = require('express');
+const _ = require('lodash');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
-var _ = require('lodash');
 
 var playerTank = new Array();
 var bulletArr = new Array();
@@ -189,7 +188,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 http.listen(port, function () {
     console.log('listening on *:' + port);
 });
