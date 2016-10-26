@@ -1,10 +1,10 @@
 /**
  * Created by TooNies1810 on 5/24/16.
  */
-class TankMap{
+class TankMap {
     // var brickMgr = new BrickManager();
 
-    constructor(width, height, size){
+    constructor(width, height, size) {
         this.width = width;
         this.height = height;
         this.size = size;
@@ -18,13 +18,13 @@ class TankMap{
         this.initData();
     }
 
-    initData(){
+    initData() {
         var itemWidth = this.width / this.size;
         var itemHeight = this.height / this.size;
-        for (var i = 0; i < itemWidth; i++){
-            for (var j = 0; j < itemHeight; j++){
-                if (i == 0 || j == 0 || i == itemWidth-1 || j == itemHeight-1){
-                    var tempBrick = new Brick(i*this.size, j*this.size, this.size);
+        for (var i = 0; i < itemWidth; i++) {
+            for (var j = 0; j < itemHeight; j++) {
+                if (i == 0 || j == 0 || i == itemWidth - 1 || j == itemHeight - 1) {
+                    var tempBrick = new Brick(i * this.size, j * this.size, this.size);
                     this.brickMgr.addBrick(tempBrick);
                 }
             }
@@ -45,17 +45,17 @@ class TankMap{
         this.brickMgr.addBrick(tempBrick6);
     }
 
-    draw(context){
+    draw(context) {
         this.brickMgr.drawAll(context);
 
     }
 
-    isMoveTable(objX, objY, size){
+    isMoveTable(objX, objY, size) {
         // console.log("X: " + objX);
         // console.log("Y: " + objY);
         // console.log("Size: " + size);
         // console.log(this.brickMgr.isMoveTable(objX,objY,size));
-        return this.brickMgr.isMoveTable(objX,objY,size);
+        return this.brickMgr.isMoveTable(objX, objY, size);
     }
 }
 

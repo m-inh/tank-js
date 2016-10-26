@@ -2,10 +2,8 @@
  * Created by TooNies1810 on 5/24/16.
  */
 
-class Tank{
-
-
-    constructor(x, y, speed, type, uid){
+class Tank {
+    constructor(x, y, speed, type, uid) {
         this.x = x;
         this.y = y;
         this.speed = speed;
@@ -25,7 +23,7 @@ class Tank{
         this.image_left = new Image();
         this.image_right = new Image();
 
-        if (this.type == 1){
+        if (this.type == 1) {
             // player
             this.name = "Me";
             this.image_up = image_up_player_up_1;
@@ -43,9 +41,9 @@ class Tank{
         }
     }
 
-    move(orient){
+    move(orient) {
         this.currOrient = orient;
-        switch (orient){
+        switch (orient) {
             case 1: //up
                 this.y += -this.speed;
                 break;
@@ -61,9 +59,9 @@ class Tank{
         }
     }
 
-    draw(context){
-        if (this.isAlive){
-            switch (this.currOrient){
+    draw(context) {
+        if (this.isAlive) {
+            switch (this.currOrient) {
                 case 1: //up
                     this.image = this.image_up;
                     break;
@@ -79,7 +77,7 @@ class Tank{
             }
 
             context.drawImage(this.image, this.x, this.y);
-            context.font="15px Georgia";
+            context.font = "15px Georgia";
             if (!this.isRevenge) {
                 context.fillStyle = "#ffffff";
             } else {
@@ -90,36 +88,36 @@ class Tank{
             // console.log(this.name.width);
         }
     }
-    
-    shoot(){
-        return new Bullet(this.x+tankSize/2-bulletSize/2, this.y+tankSize/2-bulletSize/2, this.currOrient, bulletSpeed, this.type, bulletSize, this.uid);
+
+    shoot() {
+        return new Bullet(this.x + tankSize / 2 - bulletSize / 2, this.y + tankSize / 2 - bulletSize / 2, this.currOrient, bulletSpeed, this.type, bulletSize, this.uid);
     }
 
-    isInside(objX, objY, objSize){
+    isInside(objX, objY, objSize) {
 
         var xLeft = objX;
         var xRight = objX + objSize;
         var yTop = objY;
         var yBottom = objY + objSize;
 
-        if (this.isPointInside(xLeft, yTop)  ){
+        if (this.isPointInside(xLeft, yTop)) {
             return true;
         }
-        if (this.isPointInside(xRight, yTop)){
+        if (this.isPointInside(xRight, yTop)) {
             return true;
         }
-        if (this.isPointInside(xLeft, yBottom)){
+        if (this.isPointInside(xLeft, yBottom)) {
             return true;
         }
-        if (this.isPointInside(xRight, yBottom)){
+        if (this.isPointInside(xRight, yBottom)) {
             return true;
         }
 
         return false;
     }
 
-    isPointInside(objX, objY){
-        if (objX > this.x && objX < (this.x+tankSize) && objY > this.y && objY < (this.y+tankSize)){
+    isPointInside(objX, objY) {
+        if (objX > this.x && objX < (this.x + tankSize) && objY > this.y && objY < (this.y + tankSize)) {
             return true;
         }
 

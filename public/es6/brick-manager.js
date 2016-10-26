@@ -3,25 +3,25 @@
  */
 
 
-class BrickManager{
+class BrickManager {
 
-    constructor(){
+    constructor() {
         this.brickArr = new Array();
     }
 
-    addBrick(brick){
+    addBrick(brick) {
         this.brickArr.push(brick);
     }
 
-    drawAll(context){
-        for (var i = 0; i < this.brickArr.length; i++){
+    drawAll(context) {
+        for (var i = 0; i < this.brickArr.length; i++) {
             this.brickArr[i].draw(context);
         }
     }
 
-    isMoveTable(x, y, size){
-        for (var i = 0; i < this.brickArr.length; i++){
-            if (this.brickArr[i].isInside(x,y,size) == true){
+    isMoveTable(x, y, size) {
+        for (var i = 0; i < this.brickArr.length; i++) {
+            if (this.brickArr[i].isInside(x, y, size) == true) {
 
                 // console.log("tank x: " + x);
                 // console.log("tank y: " + y);
