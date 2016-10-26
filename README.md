@@ -14,7 +14,7 @@ npm install
 
 ## Khởi động server
 ```
-node index.js
+npm start
 ```
 
 ## Chơi
