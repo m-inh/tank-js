@@ -21,11 +21,11 @@ io.on('connection', function (socket) {
 
     socket.on('login', function (name) {
         // emit to user info of their tank
-        var uid = this.id;
-        var x = getRandomArbitrary(40, MAP_WIDTH - 100);
-        var y = getRandomArbitrary(40, MAP_HEIGHT - 100);
+        let uid = this.id;
+        let x = getRandomArbitrary(40, MAP_WIDTH - 100);
+        let y = getRandomArbitrary(40, MAP_HEIGHT - 100);
 
-        var tank = {
+        let tank = {
             'uid': uid,
             'name': name,
             'x': x,
@@ -36,7 +36,7 @@ io.on('connection', function (socket) {
         //add user to array
         playerTank.push(tank);
 
-        var dataNewGame = {
+        let dataNewGame = {
             'tank': playerTank,
             'bullet': bulletArr
         };
@@ -51,13 +51,13 @@ io.on('connection', function (socket) {
     });
 
     socket.on('move', function (response) {
-        var uid = this.id;
-        var name = response["name"];
-        var newX = response["x"];
-        var newY = response["y"];
-        var newOrient = response["orient"];
+        let uid = this.id;
+        let name = response["name"];
+        let newX = response["x"];
+        let newY = response["y"];
+        let newOrient = response["orient"];
 
-        var move = {
+        let move = {
             "uid": uid,
             "name": name,
             "y": newY,
@@ -65,7 +65,7 @@ io.on('connection', function (socket) {
             "orient": newOrient
         };
 
-        for (var i = 0; i < playerTank.length; i++) {
+        for (let i = 0; i < playerTank.length; i++) {
             if (playerTank[i]["uid"] == uid) {
                 playerTank[i] = move;
             }
@@ -75,12 +75,12 @@ io.on('connection', function (socket) {
     });
 
     socket.on('shoot', function (response) {
-        var uid = response["uid"];
-        var id = response["id_bullet"];
-        var x = response["x"];
-        var y = response["y"];
-        var orient = response["orient"];
-        var shoot = {
+        let uid = response["uid"];
+        let id = response["id_bullet"];
+        let x = response["x"];
+        let y = response["y"];
+        let orient = response["orient"];
+        let shoot = {
             "uid": uid,
             "id_bullet": id,
             "x": x,
@@ -95,58 +95,40 @@ io.on('connection', function (socket) {
 
     socket.on('user_die', function (response) {
         // console.log(response["uid_enemy"]);
-        for (var i = 0; i < bestScoreArr.length; i++) {
-            var tempObj = bestScoreArr[i];
-            if (tempObj["uid"] == response["uid_enemy"]) {
-                tempObj["score"]++;
-                // console.log(tempObj["score"]);
-                break;
-            } else if (i == bestScoreArr.length - 1) {
-                var score = {
-                    "uid": response["uid_enemy"],
-                    "name": response["name_enemy"],
-                    "score": 1
-                };
-                // console.log("new score: " + i + " " + score);
-                bestScoreArr.push(score);
-            }
-        }
-        if (bestScoreArr.length == 0) {
-            var score = {
+
+        let plusScoreUserIndex = bestScoreArr.findIndex((o)=> {
+            return o.uid === response.uid_enemy
+        });
+
+        if (plusScoreUserIndex === -1) {
+            let score = {
                 "uid": response["uid_enemy"],
                 "name": response["name_enemy"],
                 "score": 1
             };
-            // console.log("new score: " + i + " " + score);
             bestScoreArr.push(score);
+        } else {
+            bestScoreArr[plusScoreUserIndex].score++;
         }
 
         // if user left game and has no top -> remove score
-        // for (var i=0; i<)
 
         // if arr has >= 2 item, sort
         if (bestScoreArr.length > 1) {
             // sort
-            for (var i = 0; i < bestScoreArr.length; i++) {
-                for (var j = 0; j < bestScoreArr.length; j++) {
-
-                    if (bestScoreArr[i]["score"] > bestScoreArr[j]["score"]) {
-                        var tempScore = bestScoreArr[i];
-                        bestScoreArr[i] = bestScoreArr[j];
-                        bestScoreArr[j] = tempScore;
-                    }
-                }
-            }
+            bestScoreArr.sort((score1, score2)=> {
+                return score1.score < score2.score
+            });
         }
 
         socket.emit('best_score', bestScoreArr);
         socket.broadcast.emit('best_score', bestScoreArr);
 
         // return new life
-        var uid = socket.id;
-        var x = getRandomArbitrary(40, MAP_WIDTH - 100);
-        var y = getRandomArbitrary(40, MAP_HEIGHT - 100);
-        var tank = {
+        let uid = socket.id;
+        let x = getRandomArbitrary(40, MAP_WIDTH - 100);
+        let y = getRandomArbitrary(40, MAP_HEIGHT - 100);
+        let tank = {
             'uid': uid,
             'name': response["name"],
             'x': x,
@@ -154,7 +136,7 @@ io.on('connection', function (socket) {
             "orient": 1
         };
 
-        for (var i = 0; i < playerTank.length; i++) {
+        for (let i = 0; i < playerTank.length; i++) {
             if (playerTank[i]["uid"] == uid) {
                 playerTank[i] = tank;
             }
@@ -169,9 +151,9 @@ io.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function (id) {
-        var uidDis = this.id;
-        var tempTankArr = new Array();
-        for (var i = 0; i < playerTank.length; i++) {
+        let uidDis = this.id;
+        let tempTankArr = new Array();
+        for (let i = 0; i < playerTank.length; i++) {
             if (playerTank[i]["uid"] != uidDis) {
                 tempTankArr.push(playerTank[i]);
             }
@@ -182,14 +164,14 @@ io.on('connection', function (socket) {
         // if user left game and has no top -> remove score
         // find index of user in array
         if (bestScoreArr.length > 5) {
-            var tempScoreArr = new Array();
-            for (var i = 5; i < bestScoreArr.length; i++) {
+            let tempScoreArr = new Array();
+            for (let i = 5; i < bestScoreArr.length; i++) {
                 if (bestScoreArr[i]["uid"] == uidDis) {
                     // remove user score
-                    for (var j = 0; j < i; j++) {
+                    for (let j = 0; j < i; j++) {
                         tempScoreArr.push(bestScoreArr[j]);
                     }
-                    for (var k = i + 1; k < bestScoreArr.length; k++) {
+                    for (let k = i + 1; k < bestScoreArr.length; k++) {
                         tempScoreArr.push(bestScoreArr[k]);
                     }
                 }
