@@ -5,7 +5,7 @@ Với phiên bản game tank này, bạn có thể chơi cùng nhiều người 
 Khá vui nhộn
 
 ## Chơi thử
-`https://okmen.herokuapp.com/`
+`https://tank-too.herokuapp.com/`
 
 ## Cài đặt Dependency:
 ```
