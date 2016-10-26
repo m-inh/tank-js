@@ -12,10 +12,25 @@ Khá vui nhộn
 npm install
 ```
 
+## Cài đặt biến môi trường
+Tạo một file `.babelrc` ở thư mục root
+```
+{
+  "presets": [
+    "es2015"
+  ]
+}
+```
+
+## Chạy gulp dịch các file js es6 -> es5
+```
+gulp
+```
+
 ## Khởi động server
 ```
 npm start
 ```
 
 ## Chơi
-Truy cập browser tới host: localhost:3000/
+Truy cập: localhost:3000/

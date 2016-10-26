@@ -9,7 +9,6 @@ class TankMap{
         this.height = height;
         this.size = size;
 
-
         // var tempBrick = new Brick(100, 200, 20);
         // var tempBrick2 = new Brick(200, 200, 20);
         // var tempBrick3= new Brick(300, 200, 20);

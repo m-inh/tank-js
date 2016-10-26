@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "private": true
+  },
   "dependencies": {
     "express": "^4.13.4",
     "lodash": "^4.13.1",
     "socket.io": "^1.4.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "gulp-babel": "^6.1.2"
+  },
   "scripts": {
+    "prestart" : "npm install",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

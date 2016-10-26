@@ -140,7 +140,6 @@ window.onkeydown = function (e) {
             if (isShootable) {
                 var newBullet = tank.shoot();
 
-                // console.log("create new bullet: " + newBullet.id);
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
 
