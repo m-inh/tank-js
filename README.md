@@ -13,7 +13,7 @@ npm install
 ```
 
 ## Cài đặt biến môi trường
-Tạo một file `.babelrc` ở thư mục root
+Tạo một file `.babelrc` ở thư mục root:
 ```
 {
   "presets": [
