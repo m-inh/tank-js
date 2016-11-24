@@ -1,6 +1,5 @@
-/**
- * Created by TooNies1810 on 5/26/16.
- */
+'use strict';
+
 class Bullet {
     constructor(x, y, orient, speed, type, size, uid) {
         this.x = x;

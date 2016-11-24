@@ -1,6 +1,4 @@
-/**
- * Created by TooNies1810 on 5/26/16.
- */
+'use strict';
 
 // init image explore
 var img_bullet_explore = new Image();
