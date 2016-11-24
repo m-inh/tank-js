@@ -1,6 +1,5 @@
-/**
- * Created by TooNies1810 on 5/27/16.
- */
+'use strict';
+
 class AnimationManager {
     constructor() {
         this.animArr = new Array();
