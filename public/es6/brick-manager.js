@@ -1,7 +1,4 @@
-/**
- * Created by TooNies1810 on 5/24/16.
- */
-
+'use strict';
 
 class BrickManager {
 
