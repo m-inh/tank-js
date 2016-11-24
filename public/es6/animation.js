@@ -1,6 +1,5 @@
-/**
- * Created by TooNies1810 on 5/27/16.
- */
+'use strict';
+
 class Animation {
     constructor(x, y, type) {
         this.x = x;
