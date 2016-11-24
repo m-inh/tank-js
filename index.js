@@ -1,6 +1,4 @@
-/**
- * Created by TooNies1810 on 5/25/16.
- */
+'use strict';
 
 const express = require('express');
 const _ = require('lodash');
