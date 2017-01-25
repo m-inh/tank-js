@@ -33,4 +33,4 @@ npm start
 ```
 
 ## Chơi
-Truy cập: localhost:3000/
+Truy cập: localhost:3000
