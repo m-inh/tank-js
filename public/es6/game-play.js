@@ -3,39 +3,38 @@
 const MAP_WIDTH = 900;
 const MAP_HEIGHT = 700;
 
-var context;
-var tank; // player's tank
-var namePlayer;
-var map;
-var speed = 3;
-// var tankSpeed = 1;
-var orient = 0;
-var tankSize = 33;
-var playerTankMgr = new TankManager();
-var player_revenge = "";
+let context;
+let tank; // player's tank
+let namePlayer;
+let map;
+let speed = 3;
+let orient = 0;
+let tankSize = 33;
+let playerTankMgr = new TankManager();
+let player_revenge = "";
 
-var playerType = 1;
-var enemyType = 2;
+let playerType = 1;
+let enemyType = 2;
 
 // bullet
-var bulletMgr = new BulletManager();
-var bulletSpeed = 4;
-var bulletSize = 8;
-var bulletID = 0;
+let bulletMgr = new BulletManager();
+let bulletSpeed = 4;
+let bulletSize = 8;
+let bulletID = 0;
 
 // animation
-var animMgr = new AnimationManager();
-var animTime = 3;
+let animMgr = new AnimationManager();
+let animTime = 3;
 
-var count = 0;
-var countAnim = 0;
-var isShootable = true;
-var isStart = false;
-var isMovetable = false;
+let count = 0;
+let countAnim = 0;
+let isShootable = true;
+let isStart = false;
+let isMovetable = false;
 
 function gameStart(uid, x, y, name) {
 
-    var audio_start = audio_start_game;
+    let audio_start = audio_start_game;
     audio_start.play();
 
     map = new TankMap(MAP_WIDTH, MAP_HEIGHT, 20);
@@ -66,28 +65,28 @@ function update() {
     if (isMovetable) {
         switch (orient) {
             case 1:
-                if (map.isMoveTable(tank.x, tank.y - speed, tankSize) == true) {
+                if (map.isMoveTable(tank.x, tank.y - speed, tankSize) === true) {
                     tank.move(orient);
                 }
                 break;
             case 2:
-                if (map.isMoveTable(tank.x, tank.y + speed, tankSize) == true) {
+                if (map.isMoveTable(tank.x, tank.y + speed, tankSize) === true) {
                     tank.move(orient);
                 }
                 break;
             case 3:
-                if (map.isMoveTable(tank.x - speed, tank.y, tankSize) == true) {
+                if (map.isMoveTable(tank.x - speed, tank.y, tankSize) === true) {
                     tank.move(orient);
                 }
                 break;
             case 4:
-                if (map.isMoveTable(tank.x + speed, tank.y, tankSize) == true) {
+                if (map.isMoveTable(tank.x + speed, tank.y, tankSize) === true) {
                     tank.move(orient);
                 }
                 break;
         }
 
-        if (orient != 0) {
+        if (orient !== 0) {
             emitMove(tank.x, tank.y, tank.currOrient, tank.uid);
         }
     }
@@ -136,7 +135,7 @@ window.onkeydown = function (e) {
             break;
         case 32: // space
             if (isShootable) {
-                var newBullet = tank.shoot();
+                let newBullet = tank.shoot();
 
                 bulletMgr.addNewBullet(newBullet);
                 isShootable = false;
@@ -168,54 +167,54 @@ function explore(x, y, type) {
     // 1: tank
     // 2: bullet
 
-    var anim = new Animation(x, y, type);
+    let anim = new Animation(x, y, type);
     animMgr.addNewAnim(anim);
 
     // playing sound
-    var audio;
-    if (type == 1) {
+    let audio;
+    if (type === 1) {
         audio = audio_tank_explore;
-    } else if (type == 2) {
+    } else if (type === 2) {
         audio = audio_bullet_explore;
     }
     audio.play();
 }
 
 ///////////////////////////// socket io
-var socket = io();
+let socket = io();
 
 socket.on('user', function (response) {
     // init tanks
-    var tankArr = response["tank"];
-    for (var i = 0; i < tankArr.length - 1; i++) {
-        var id = tankArr[i]["uid"];
-        var name = tankArr[i]["name"];
-        var x = tankArr[i]["x"];
-        var y = tankArr[i]["y"];
-        var orient = tankArr[i]["orient"];
+    let tankArr = response["tank"];
+    for (let i = 0; i < tankArr.length - 1; i++) {
+        let id = tankArr[i]["uid"];
+        let name = tankArr[i]["name"];
+        let x = tankArr[i]["x"];
+        let y = tankArr[i]["y"];
+        let orient = tankArr[i]["orient"];
 
-        var newEnemy = new Tank(x, y, speed, enemyType, id);
+        let newEnemy = new Tank(x, y, speed, enemyType, id);
         newEnemy.currOrient = orient;
         newEnemy.name = name;
         addNewEnemyTank(newEnemy);
     }
 
-    var uid = tankArr[tankArr.length - 1]["uid"];
-    var nameTank = tankArr[tankArr.length - 1]["name"];
-    var ux = tankArr[tankArr.length - 1]["x"];
-    var uy = tankArr[tankArr.length - 1]["y"];
+    let uid = tankArr[tankArr.length - 1]["uid"];
+    let nameTank = tankArr[tankArr.length - 1]["name"];
+    let ux = tankArr[tankArr.length - 1]["x"];
+    let uy = tankArr[tankArr.length - 1]["y"];
 
     namePlayer = nameTank;
     // console.log(nameTank);
     // init bullet
-    var bullets = response["bullet"];
-    for (var i = 0; i < bullets.length; i++) {
-        var bullet = bullets[i];
-        var uidBullet = bullet["uid"];
-        var xBullet = bullet["x"];
-        var yBullet = bullet["y"];
-        var orientBullet = bullet["orient"];
-        var newBullet = new Bullet(xBullet, yBullet, orientBullet, bulletSpeed, 2, uidBullet);
+    let bullets = response["bullet"];
+    for (let i = 0; i < bullets.length; i++) {
+        let bullet = bullets[i];
+        let uidBullet = bullet["uid"];
+        let xBullet = bullet["x"];
+        let yBullet = bullet["y"];
+        let orientBullet = bullet["orient"];
+        let newBullet = new Bullet(xBullet, yBullet, orientBullet, bulletSpeed, 2, uidBullet);
         bulletMgr.addNewBullet(newBullet);
     }
 
@@ -225,18 +224,18 @@ socket.on('user', function (response) {
 });
 
 socket.on('new_enemy', function (response) {
-    var id = response["uid"];
-    var name = response["name"];
-    var x = response["x"];
-    var y = response["y"];
-    var orient = response["orient"];
+    let id = response["uid"];
+    let name = response["name"];
+    let x = response["x"];
+    let y = response["y"];
+    let orient = response["orient"];
 
-    var newEnemy = new Tank(x, y, speed, enemyType, id);
+    let newEnemy = new Tank(x, y, speed, enemyType, id);
     newEnemy.currOrient = orient;
     newEnemy.name = name;
     addNewEnemyTank(newEnemy);
 
-    var newPlayerSound = new_player;
+    let newPlayerSound = new_player;
     newPlayerSound.play();
 });
 
@@ -246,32 +245,32 @@ socket.on('user_disconnect', function (uid) {
 });
 
 socket.on('player_move', function (response) {
-    var id = response["uid"];
-    var x = response["x"];
-    var y = response["y"];
-    var orient = response["orient"];
+    let id = response["uid"];
+    let x = response["x"];
+    let y = response["y"];
+    let orient = response["orient"];
 
     updateEnemyTank(x, y, orient, id);
 });
 
 socket.on('new_bullet', function (response) {
-    var uid = response["uid"];
-    var id = response["id_bullet"];
-    var x = response["x"];
-    var y = response["y"];
-    var orient = response["orient"];
+    let uid = response["uid"];
+    let id = response["id_bullet"];
+    let x = response["x"];
+    let y = response["y"];
+    let orient = response["orient"];
 
     // console.log("new bullet receive: " + id);
 
-    var newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
+    let newBullet = new Bullet(x, y, orient, bulletSpeed, 2, bulletSize, uid);
     // newBullet.id = id;
     newBullet.setID(id);
     bulletMgr.addNewBullet(newBullet);
 });
 
 socket.on('user_die_update', function (response) {
-    var uidEnemy = response["uid_enemy"];
-    var idBullet = response["id_bullet"];
+    let uidEnemy = response["uid_enemy"];
+    let idBullet = response["id_bullet"];
 
     // console.log("idBullet: " + idBullet);
     // bonus point to enemy_user
@@ -279,10 +278,10 @@ socket.on('user_die_update', function (response) {
 });
 
 socket.on('new_life', function (response) {
-    var id = response["uid"];
-    var x = response["x"];
-    var y = response["y"];
-    var orient = response["orient"];
+    let id = response["uid"];
+    let x = response["x"];
+    let y = response["y"];
+    let orient = response["orient"];
     tank = new Tank(x, y, speed, playerType, id);
     tank.name = namePlayer;
     tank.enemy_revenge = player_revenge;
@@ -290,10 +289,10 @@ socket.on('new_life', function (response) {
 });
 
 socket.on('best_score', function (response) {
-    for (var i = 0; i < response.length; i++) {
-        var uid = response[i]["uid"];
-        var name = response[i]["name"];
-        var score = response[i]["score"];
+    for (let i = 0; i < response.length; i++) {
+        let uid = response[i]["uid"];
+        let name = response[i]["name"];
+        let score = response[i]["score"];
         // console.log(uid+" " + " " + score);
     }
     // console.log("///////////////////////////////");
@@ -302,7 +301,7 @@ socket.on('best_score', function (response) {
 //////////////////////// emit
 
 function emitMove(x, y, orient, uid) {
-    var move = {
+    let move = {
         "uid": uid,
         "name": namePlayer,
         "x": x,
@@ -313,7 +312,7 @@ function emitMove(x, y, orient, uid) {
 }
 
 function emitShoot(xBullet, yBullet, orientBullet, uid, id) {
-    var shoot = {
+    let shoot = {
         "uid": uid,
         "id_bullet": id,
         "x": xBullet,
@@ -325,8 +324,8 @@ function emitShoot(xBullet, yBullet, orientBullet, uid, id) {
 
 function emitDie(uid, uidEnemy, idBullet) {
     // console.log("idbullet send: " + idBullet);
-    var nameEnemy = playerTankMgr.getNameTankByUid(uidEnemy);
-    var die = {
+    let nameEnemy = playerTankMgr.getNameTankByUid(uidEnemy);
+    let die = {
         "uid": uid,
         "name": namePlayer,
         "uid_enemy": uidEnemy,
@@ -340,16 +339,16 @@ function emitDie(uid, uidEnemy, idBullet) {
  * Document is ready
  */
 jQuery(document).ready(function ($) {
-    var modal_login = $('#login');
+    let modal_login = $('#login');
     modal_login.modal('show');
     modal_login.on('shown.bs.modal', function () {
         $('#name').focus()
     });
 
     modal_login.on('hidden.bs.modal', function () {
-        var name_player = $('#name').val();
+        let name_player = $('#name').val();
 
-        if (name_player == '') {
+        if (name_player === '') {
             modal_login.modal('show');
             return;
         }
@@ -363,7 +362,7 @@ jQuery(document).ready(function ($) {
         update_best_score(best_score);
     });
 
-    var canvas = $('#game')[0];
+    let canvas = $('#game')[0];
     context = canvas.getContext("2d");
     context.fillStyle = '#000000';
     canvas.width = MAP_WIDTH;
@@ -372,22 +371,20 @@ jQuery(document).ready(function ($) {
     setInterval(gameLoop, 17);
 
     function update_best_score(data_arr) {
-        var html_best_score = '';
+        let html_best_score = '';
 
-        for (var i = 0; i < data_arr.length; i++) {
-            var player = data_arr[i];
-            var current = '';
+        for (let i = 0; i < data_arr.length; i++) {
+            let player = data_arr[i];
+            let current = '';
 
-            if (player.uid == tank.uid) {
+            if (player.uid === tank.uid) {
                 current = 'active';
             }
 
-            var html_player = '<div class="player ' + current + '" data-id="' + player.uid + '">' +
+            html_best_score += '<div class="player ' + current + '" data-id="' + player.uid + '">' +
                 '<span class="name">' + player.name + '</span>: ' +
                 '<span class="score">' + player.score + '</span>' +
                 '</div>';
-
-            html_best_score += html_player;
         }
 
         $('.top10').html(html_best_score);

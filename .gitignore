@@ -2,7 +2,5 @@
 
 .DS_Store
 
-.babelrc
-
 node_modules
 public/dist

@@ -16,7 +16,7 @@
     "gulp-babel": "^6.1.2"
   },
   "scripts": {
-    "prestart" : "npm install",
+    "prestart" : "npm install && gulp",
     "start": "node index.js"
   },
   "author": "minh",

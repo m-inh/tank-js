@@ -2,14 +2,14 @@
 
 const express = require('express');
 const _ = require('lodash');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+let app = express();
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
 
-var playerTank = new Array();
-var bulletArr = new Array();
+let playerTank = [];
+let bulletArr = [];
 
-var bestScoreArr = new Array();
+let bestScoreArr = [];
 
 const MAP_WIDTH = 900;
 const MAP_HEIGHT = 700;
