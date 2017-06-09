@@ -19,6 +19,6 @@
     "prestart" : "npm install && gulp",
     "start": "node index.js"
   },
-  "author": "minh",
+  "author": "github.com/minhnt95",
   "license": "ISC"
 }
