@@ -13,10 +13,11 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.18.0",
+    "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   },
   "scripts": {
-    "prestart" : "npm install && gulp",
+    "prestart": "npm install && gulp",
     "start": "node index.js"
   },
   "author": "github.com/minhnt95",
