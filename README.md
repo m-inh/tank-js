@@ -4,6 +4,11 @@ Tank bắn nhau, ý tưởng dựa trên trò tank 90 huyền thoại chơi trê
 Với phiên bản game tank này, bạn có thể chơi cùng nhiều người khác.
 Khá vui nhộn
 
+![](tankjs.gif)
+
+
+
+
 ## Tech stack
 * node.js
 * expressJs
